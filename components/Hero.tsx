@@ -88,7 +88,8 @@ export const Hero = () => {
           >
             <BlurImage
               // src={"/images/landing.png"}
-              src={"/images/DSC03777.jpg"}
+              // src={"/images/DSC03777.jpg"}
+              src="https://rotekurve.s3.eu-north-1.amazonaws.com/DSC03777.JPG"
               layout="fill"
               className=" rounded-xl md:rounded-3xl border mx-auto object-cover shadow-sm  object-right-top  "
             />
