@@ -11,7 +11,7 @@ import { getFileBySlug, getFiles } from "lib/mdx";
 export default function Blog({ mdxSource, frontMatter }: any) {
   return (
     <Container
-      title={`${frontMatter.title} | Foxtrot`}
+      title={`${frontMatter.title} | 308er`}
       description={frontMatter.description}
       className="max-w-7xl mx-auto pb-20 px-4 md:px-16"
     >

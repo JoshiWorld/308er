@@ -14,7 +14,7 @@ const LogoWithText = ({
     <div className="flex flex-row justify-between items-center space-x-1">
       {/* <LogoMain className={clsx(logoClassName)} /> */}
       <Link href="/" className={clsx("font-bold text-2xl", textClassName)}>
-        Foxtrot
+        308er
       </Link>
     </div>
   );

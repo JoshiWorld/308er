@@ -8,7 +8,7 @@ const createSitemap = (
           .map((slug) => {
             return `
                 <url>
-                    <loc>${`https://foxtrot.aceternity.com/${slug}`}</loc>
+                    <loc>${`https://308er.de/${slug}`}</loc>
                 </url>
             `;
           })

@@ -15,7 +15,7 @@ export const Container = (props: any) => {
     title,
     description: `Die 308er sind eine kleine Truppe aus Hannover, die ihre Stadt neu auf die Karte bringen.`,
     type: "website",
-    image: "https://foxtrot.aceternity.com/banner.png",
+    image: "https://rotekurve.s3.eu-north-1.amazonaws.com/DSC03777.JPG",
     ...customMeta,
   };
 
@@ -27,11 +27,11 @@ export const Container = (props: any) => {
         <meta content={meta.description} name="description" />
         <meta
           property="og:url"
-          content={`https://foxtrot.aceternity.com${router.asPath}`}
+          content={`https://308er.de${router.asPath}`}
         />
         <link
           rel="canonical"
-          href={`https://foxtrot.aceternity.com${router.asPath}`}
+          href={`https://308er.de${router.asPath}`}
         />
         <meta property="og:type" content={meta.type} />
         <meta property="og:site_name" content="308er" />
