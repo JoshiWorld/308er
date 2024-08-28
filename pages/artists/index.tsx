@@ -1,0 +1,121 @@
+import { Container } from "@components/Container";
+
+import { getAllFilesFrontMatter } from "lib/mdx";
+
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect } from "react";
+
+import { useRouter } from "next/router";
+import { BlurImage } from "@components/BlurImage";
+
+import moment from "moment";
+import { GridPattern } from "@components/GridPattern";
+
+const artists = ({ artists }: any) => {
+  const pattern = {
+    y: -6,
+    squares: [
+      [-1, 2],
+      [1, 3],
+      // Random values between -10 and 10
+      ...Array.from({ length: 10 }, () => [
+        Math.floor(Math.random() * 20) - 10,
+        Math.floor(Math.random() * 20) - 10,
+      ]),
+    ],
+  };
+
+  return (
+    <Container
+      title="Künstler | 308er"
+      className="pb-20 relative"
+      description="Latest articles on web development and how a website can help you 10x your revenue."
+    >
+      <div className="absolute inset-0 rounded-2xl transition duration-300 [mask-image:linear-gradient(white,transparent)] group-hover:opacity-50">
+        <GridPattern
+          width={120}
+          height={120}
+          x="50%"
+          className="absolute inset-x-0 inset-y-[-30%] h-[160%]  w-full skew-y-[-5deg] fill-tertiary/[0.05] stroke-gray-100  dark:fill-primary dark:stroke-gray-100"
+          {...pattern}
+        />
+      </div>
+      <div className="pb-4 pt-4 md:pb-20 md:pt-10 relative px-4">
+        <div className="mx-auto max-w-2xl sm:text-center pb-10 ">
+          <h2 className="text-3xl font-medium tracking-tight text-gray-900">
+            Das sind unsere Künstler
+          </h2>
+          <p className="mt-2 text-lg text-gray-600">
+            Hier kannst du dir unsere Künstler im Detail anschauen.
+          </p>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto mb-20">
+        {artists.map((artist: any) => (
+          <ArtistCard
+            key={`artist-${artist.slug}`}
+            link={"/artists/" + artist.slug}
+            title={artist.title}
+            description={artist.description}
+            image={artist.image}
+            author={artist.author}
+            authorAvatar={artist.authorAvatar}
+            publishedAt={artist.publishedAt}
+          />
+        ))}
+      </div>
+    </Container>
+  );
+};
+
+const ArtistCard = ({
+  title,
+  description,
+  image,
+  link,
+  author,
+  authorAvatar,
+  publishedAt,
+}: any) => {
+  const truncate = (text: string) => {
+    if (text.length > 100) {
+      return text.substring(0, 200) + "...";
+    } else {
+      return text;
+    }
+  };
+  return (
+    <Link
+      href={link}
+      className="relative  rounded-2xl p-4 transition duration-200"
+    >
+      <div className="flex flex-col cursor-pointer">
+        <div className="w-full aspect-w-16 aspect-h-10 bg-gray-100 rounded-lg overflow-hidden xl:aspect-w-16 xl:aspect-h-10 relative h-40 sm:h-72 md:h-64 ">
+          <BlurImage
+            src={image}
+            alt="thumbnail"
+            fill
+            className="object-cover h-full w-full"
+          />
+        </div>
+        <div className="flex space-x-2  my-2 items-center"></div>
+        <h2 className="font-bold my-4 text-2xl text-zinc-700">{title}</h2>
+        <h4 className="text-base text-zinc-600">{truncate(description)}</h4>
+      </div>
+    </Link>
+  );
+};
+
+export async function getStaticProps() {
+  const artists = await getAllFilesFrontMatter("artists");
+
+  let sortedArtists = artists.sort(
+    (a: any, b: any) =>
+      new Date(b?.publishedAt)?.getTime() - new Date(a?.publishedAt)?.getTime()
+  );
+
+  return { props: { artists: sortedArtists } };
+}
+
+export default artists;
